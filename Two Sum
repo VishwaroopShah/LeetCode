@@ -1,0 +1,46 @@
+//First approach using brute force approach
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int currentSum = 0;
+        vector<int> abc;
+        for(int i = 0; i < nums.size(); i++) {
+            for(int j = i+1; j < nums.size(); j++) {
+                if((nums[i] + nums[j]) == target) {
+                    abc.push_back(i);
+                    abc.push_back(j);
+                    break;
+                }
+            }
+        }
+        return abc;
+        
+    }
+};
+
+
+//Second approach using unordered map
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mapOfNum;
+        vector<int> twoNum;
+        for(int i = 0; i < nums.size(); i++) {
+            mapOfNum[nums[i]] = i;
+        }
+        
+        for(int i = 0; i < nums.size(); i++) {
+            int temp = target - nums[i];
+            if(!(mapOfNum.find(temp) == mapOfNum.end())) {//found the solution
+                if(mapOfNum.at(temp) != i) {
+                    twoNum.push_back(i);
+                    twoNum.push_back(mapOfNum.at(temp));
+                    break;
+                }
+            }
+        }
+        return twoNum;
+    }
+};
